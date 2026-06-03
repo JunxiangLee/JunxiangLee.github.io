@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>企业级设计系统 DEEP Design - 项目详情</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #C9A84C;
+            --gold-light: #D4B95A;
+            --gold-dark: #A68B3D;
+            --black: #0a0a0a;
+            --black-card: #1a1a1a;
+            --black-border: #333;
+            --white: #ffffff;
+            --white-light: rgba(255, 255, 255, 0.8);
+            --white-lighter: rgba(255, 255, 255, 0.6);
+        }
+
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+        }
+
+        .back-link {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.9rem;
+            z-index: 100;
+            transition: opacity 0.3s ease;
+        }
+
+        .back-link:hover {
+            opacity: 0.7;
+        }
+
+        .hero-section {
+            background: linear-gradient(180deg, #1a365d 0%, #0a0a0a 100%);
+            padding: 6rem 2rem 8rem;
+            text-align: center;
+        }
+
+        .hero-tags {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-tag {
+            padding: 0.3rem 0.8rem;
+            background: rgba(201, 168, 76, 0.1);
+            color: var(--gold);
+            font-size: 0.75rem;
+            border-radius: 9999px;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            color: var(--white-lighter);
+            margin-bottom: 2rem;
+        }
+
+        .hero-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            color: var(--white-lighter);
+            font-size: 0.9rem;
+        }
+
+        .hero-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .results-section {
+            background: var(--black-card);
+            border: 1px solid var(--black-border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: -4rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .result-item {
+            text-align: center;
+        }
+
+        .result-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .result-label {
+            font-size: 0.85rem;
+            color: var(--white-lighter);
+        }
+
+        .main-content {
+            padding: 4rem 0;
+        }
+
+        .content-section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-number {
+            width: 24px;
+            height: 24px;
+            background: rgba(201, 168, 76, 0.1);
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .section-text {
+            font-size: 0.95rem;
+            color: var(--white-lighter);
+            line-height: 1.8;
+        }
+
+        .section-text p {
+            margin-bottom: 1rem;
+        }
+
+        .design-step {
+            background: var(--black-card);
+            border: 1px solid var(--black-border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-number {
+            width: 28px;
+            height: 28px;
+            background: rgba(201, 168, 76, 0.1);
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .step-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .step-description {
+            font-size: 0.9rem;
+            color: var(--white-lighter);
+            margin-bottom: 1.5rem;
+        }
+
+        .step-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .step-card {
+            background: #111;
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .step-card-title {
+            font-size: 0.85rem;
+            color: var(--gold);
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+
+        .step-card-text {
+            font-size: 0.85rem;
+            color: var(--white-lighter);
+            line-height: 1.6;
+        }
+
+        .step-card-image {
+            width: 100%;
+            height: 120px;
+            background: #222;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .wide-image {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #111;
+            border-radius: 8px;
+            margin-top: 1rem;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .mockup-section {
+            background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+            border-radius: 12px;
+            padding: 4rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .mockup-placeholder {
+            width: 100%;
+            max-width: 600px;
+            height: 300px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            gap: 1rem;
+        }
+
+        .mockup-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(201, 168, 76, 0.2);
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--gold);
+        }
+
+        .mockup-label {
+            font-size: 0.9rem;
+            color: var(--white-lighter);
+        }
+
+        .mockup-sub-label {
+            font-size: 0.8rem;
+            color: var(--white-lighter);
+            opacity: 0.7;
+        }
+
+        .footer {
+            padding: 3rem 0;
+            border-top: 1px solid var(--black-border);
+            margin-top: 4rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-link {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-link:hover {
+            opacity: 0.7;
+        }
+
+        .footer-tags {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .footer-tag {
+            padding: 0.3rem 0.8rem;
+            background: rgba(201, 168, 76, 0.1);
+            color: var(--gold);
+            font-size: 0.75rem;
+            border-radius: 9999px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 1.75rem;
+            }
+
+            .results-grid {
+                grid-template-columns: 2fr;
+            }
+
+            .step-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="2026-05-28 final.html" class="back-link">
+        <span>←</span>
+        <span>返回作品集</span>
+    </a>
+
+    <section class="hero-section">
+        <div class="hero-tags">
+            <span class="hero-tag">Design System</span>
+            <span class="hero-tag">Component Library</span>
+            <span class="hero-tag">Cross-platform</span>
+        </div>
+        <h1 class="hero-title">DEEP Design设计系统</h1>
+        <p class="hero-subtitle">构建跨端一致性的企业级设计语言</p>
+        <div class="hero-meta">
+            <span>📅 2017-2024</span>
+            <span>👤 Key contributors</span>
+        </div>
+    </section>
+
+    <div class="container">
+        <section class="results-section">
+            <div class="section-label">核心成果 KEY RESULTS</div>
+            <div class="results-grid">
+                <div class="result-item">
+                    <div class="result-value">200+</div>
+                    <div class="result-label">组件数量</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-value">91%</div>
+                    <div class="result-label">复用率</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-value">50%</div>
+                    <div class="result-label">效率提升</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-value">3x</div>
+                    <div class="result-label">交付提速</div>
+                </div>
+            </div>
+        </section>
+
+        <main class="main-content">
+            <section class="content-section">
+                <h2 class="section-title">
+                    <span class="section-number">01</span>
+                    <span>项目背景</span>
+                </h2>
+                <div class="section-text">
+                    <p>随着部门业务快速扩张，多条产品线之间设计风格割裂、组件重复建设严重，导致设计研发效率低下。需要建立统一的设计系统来规范体验并提升协作效率。</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">
+                    <span class="section-number">02</span>
+                    <span>我的角色</span>
+                </h2>
+                <div class="section-text">
+                    <p>担任核心贡献者，产出部分组件的设计规范。同时作为业务设计师沉淀业务组件，反哺通用规范。</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">
+                    <span class="section-number">03</span>
+                    <span>设计过程</span>
+                </h2>
+                <div class="step-card">
+                    <div class="section-text">
+                        <p><strong style="color: var(--gold);">现状审计：</strong>梳理 8 个产品线的组件库，发现 73% 的重复建设，定义 Top-30 核心组件</p>
+                        <p><strong style="color: var(--gold);">原则制定：</strong>确立「一致、高效、可扩展」三大原则，撰写 200 页设计规范文档</p>
+                        <p><strong style="color: var(--gold);">组件分级：</strong>建立 Atom/Molecule/Organism 三级架构，支持主题化配置</p>
+                        <p><strong style="color: var(--gold);">推广落地：</strong>组织 15 次工作坊，建立设计系统 Slack 社区，持续迭代维护</p>
+                    </div>
+                    <div class="wide-image" style="background-image: url('项目详情配图/05企业级设计系统 DEEP Design/企业级设计系统 DEEP Design-设计过程.jpg');"></div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">
+                    <span class="section-number">04</span>
+                    <span>应用案例</span>
+                </h2>
+                <div class="wide-image" style="background-image: url('项目详情配图/05企业级设计系统 DEEP Design/企业级设计系统 DEEP Design-应用案例.jpg');"></div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="2026-05-29 final.html#projects" class="footer-link" onclick="window.location.href='2026-05-29 final.html#projects'; return true;">
+                    <span>←</span>
+                    <span>所有项目</span>
+                </a>
+                <div class="footer-tags">
+                    <span class="footer-tag">抖音创作者中心</span>
+                    <span class="footer-tag">淘宝直播互动系统</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

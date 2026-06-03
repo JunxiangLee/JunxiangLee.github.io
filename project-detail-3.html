@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teambition集团版满意度提升 - 项目详情</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #C9A84C;
+            --gold-light: #D4B95A;
+            --gold-dark: #A68B3D;
+            --black: #0a0a0a;
+            --black-card: #1a1a1a;
+            --black-border: #333;
+            --white: #ffffff;
+            --white-light: rgba(255, 255, 255, 0.8);
+            --white-lighter: rgba(255, 255, 255, 0.6);
+        }
+
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+        }
+
+        .back-link {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.9rem;
+            z-index: 100;
+            transition: opacity 0.3s ease;
+        }
+
+        .back-link:hover {
+            opacity: 0.7;
+        }
+
+        .hero-section {
+            background: linear-gradient(180deg, #1a365d 0%, #0a0a0a 100%);
+            padding: 6rem 2rem 8rem;
+            text-align: center;
+        }
+
+        .hero-tags {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-tag {
+            padding: 0.3rem 0.8rem;
+            background: rgba(201, 168, 76, 0.1);
+            color: var(--gold);
+            font-size: 0.75rem;
+            border-radius: 9999px;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            color: var(--white-lighter);
+            margin-bottom: 2rem;
+        }
+
+        .hero-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            color: var(--white-lighter);
+            font-size: 0.9rem;
+        }
+
+        .hero-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .results-section {
+            background: var(--black-card);
+            border: 1px solid var(--black-border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: -4rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .result-item {
+            text-align: center;
+        }
+
+        .result-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .result-label {
+            font-size: 0.85rem;
+            color: var(--white-lighter);
+        }
+
+        .main-content {
+            padding: 4rem 0;
+        }
+
+        .content-section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-number {
+            width: 24px;
+            height: 24px;
+            background: rgba(201, 168, 76, 0.1);
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .section-text {
+            font-size: 0.95rem;
+            color: var(--white-lighter);
+            line-height: 1.8;
+        }
+
+        .section-text p {
+            margin-bottom: 1rem;
+        }
+
+        .design-step {
+            background: var(--black-card);
+            border: 1px solid var(--black-border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-number {
+            width: 28px;
+            height: 28px;
+            background: rgba(201, 168, 76, 0.1);
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .step-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .step-description {
+            font-size: 0.9rem;
+            color: var(--white-lighter);
+            margin-bottom: 1.5rem;
+        }
+
+        .step-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .step-card {
+            background: #111;
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .step-card-title {
+            font-size: 0.85rem;
+            color: var(--gold);
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+
+        .step-card-text {
+            font-size: 0.85rem;
+            color: var(--white-lighter);
+            line-height: 1.6;
+        }
+
+        .step-card-image {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #222;
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .full-width-image {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #111;
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .wide-image {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #111;
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .mockup-section {
+            background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+            border-radius: 12px;
+            padding: 4rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .mockup-placeholder {
+            width: 100%;
+            max-width: 600px;
+            aspect-ratio: 16/9;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            gap: 1rem;
+        }
+
+        .mockup-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(201, 168, 76, 0.2);
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--gold);
+        }
+
+        .mockup-label {
+            font-size: 0.9rem;
+            color: var(--white-lighter);
+        }
+
+        .mockup-sub-label {
+            font-size: 0.8rem;
+            color: var(--white-lighter);
+            opacity: 0.7;
+        }
+
+        .step-card-carousel {
+            position: relative;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .step-card-carousel-track {
+            display: flex;
+            overflow: hidden;
+            border-radius: 8px;
+            background: #222;
+        }
+
+        .step-card-carousel-slide {
+            min-width: 100%;
+            aspect-ratio: 16/9;
+            background-size: cover;
+            background-position: center;
+            display: none;
+        }
+
+        .step-card-carousel-slide.active {
+            display: block;
+        }
+
+        .step-card-carousel-dots {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 2;
+        }
+
+        .step-card-carousel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .step-card-carousel-dot.active {
+            background: var(--gold, #c9a962);
+        }
+
+        .footer {
+            padding: 3rem 0;
+            border-top: 1px solid var(--black-border);
+            margin-top: 4rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-link {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-link:hover {
+            opacity: 0.7;
+        }
+
+        .footer-tags {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .footer-tag {
+            padding: 0.3rem 0.8rem;
+            background: rgba(201, 168, 76, 0.1);
+            color: var(--gold);
+            font-size: 0.75rem;
+            border-radius: 9999px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 1.75rem;
+            }
+
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .step-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="2026-05-28 final.html" class="back-link">
+        <span>←</span>
+        <span>返回作品集</span>
+    </a>
+
+    <section class="hero-section">
+        <div class="hero-tags">
+            <span class="hero-tag">Multiple Roles</span>
+            <span class="hero-tag">Systematic Upgrade</span>
+            <span class="hero-tag">Cross-departmental Collaboration</span>
+        </div>
+        <h1 class="hero-title">Teambition集团版满意度提升</h1>
+        <p class="hero-subtitle">通过多角色的体验地图提升工具使用体验</p>
+        <div class="hero-meta">
+            <span>📅 2022</span>
+            <span>👤 Lead UX Designer</span>
+        </div>
+    </section>
+
+    <div class="container">
+        <section class="results-section">
+            <div class="section-label">核心成果 KEY RESULTS</div>
+            <div class="results-grid">
+                <div class="result-item">
+                    <div class="result-value">+15%</div>
+                    <div class="result-label">用户满意度</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-value">+20%</div>
+                    <div class="result-label">日活用户</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-value">6</div>
+                    <div class="result-label">核心功能升级</div>
+                </div>
+            </div>
+        </section>
+
+        <main class="main-content">
+            <section class="content-section">
+                <h2 class="section-title">
+                    <span class="section-number">01</span>
+                    <span>项目背景</span>
+                </h2>
+                <div class="section-text">
+                    <p>Teambition作为一个优秀的项目管理工具，19年被阿里巴巴收购，20年加入钉钉集团成为钉钉项目里。但即便是这家超大型公司，有一些特定的使用场景及个性化诉求，通用版无法满足。那针对阿里巴巴的超大、垂直场景、内部工具多样化以及专属定制特性，在产品设计上也带来了一定的挑战。我们对接的集团效能工程团队，希望通过「目标管理-项目管理-任务管理-文档管理等一系列工具」来统一员工的工作方式，将工作在线化以及数字化，最终提升员工工作效能。因此，设计的目标核心是提升产品的使用体验及用户满意度。</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">
+                    <span class="section-number">02</span>
+                    <span>我的角色</span>
+                </h2>
+                <div class="section-text">
+                    <p>作为Teambition集团版的主设计师，主导了问卷调研、用户访谈及数据分析，推导出项目管理员及项目成员的体验地图。分角色制定设计策略，推动设计方案落地并验证。</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">
+                    <span class="section-number">03</span>
+                    <span>设计过程</span>
+                </h2>
+
+                <div class="design-step">
+                    <div class="step-header">
+                        <span class="step-number">01</span>
+                        <span class="step-title">问题定义</span>
+                    </div>
+                    <div class="step-card-carousel">
+                        <div class="step-card-carousel-track">
+                            <div class="step-card-carousel-slide active" style="background-image: url('项目详情配图/03Teambition集团版满意度提升/Teambition集团版满意度提升-问题定义1.jpg');"></div>
+                            <div class="step-card-carousel-slide" style="background-image: url('项目详情配图/03Teambition集团版满意度提升/Teambition集团版满意度提升-问题定义2.jpg');"></div>
+                            <div class="step-card-carousel-slide" style="background-image: url('项目详情配图/03Teambition集团版满意度提升/Teambition集团版满意度提升-问题定义3.jpg');"></div>
+                        </div>
+                        <div class="step-card-carousel-dots">
+                            <span class="step-card-carousel-dot active" data-index="0"></span>
+                            <span class="step-card-carousel-dot" data-index="1"></span>
+                            <span class="step-card-carousel-dot" data-index="2"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="design-step">
+                    <div class="step-header">
+                        <span class="step-number">02</span>
+                        <span class="step-title">竞品分析</span>
+                    </div>
+                    <div class="wide-image" style="background-image: url('项目详情配图/03Teambition集团版满意度提升/Teambition集团版满意度提升-竞品分析.jpg');"></div>
+                </div>
+
+                <div class="design-step">
+                    <div class="step-header">
+                        <span class="step-number">03</span>
+                        <span class="step-title">分角色制定设计策略及方案</span>
+                    </div>
+                    <div class="step-grid">
+                        <div class="step-card">
+                            <div class="step-card-title">FOR 项目管理员</div>
+                            <div class="step-card-carousel">
+                                <div class="step-card-carousel-track">
+                                    <div class="step-card-carousel-slide active" style="background-image: url('项目详情配图/03Teambition集团版满意度提升/Teambition集团版满意度提升-for项目管理员1.jpg');"></div>
+                                    <div class="step-card-carousel-slide" style="background-image: url('项目详情配图/03Teambition集团版满意度提升/Teambition集团版满意度提升-for项目管理员 2.jpg');"></div>
+                                    <div class="step-card-carousel-slide" style="background-image: url('项目详情配图/03Teambition集团版满意度提升/Teambition集团版满意度提升-for项目管理员3.jpg');"></div>
+                                    <div class="step-card-carousel-slide" style="background-image: url('项目详情配图/03Teambition集团版满意度提升/Teambition集团版满意度提升-for项目管理员4.jpg');"></div>
+                                    <div class="step-card-carousel-slide" style="background-image: url('项目详情配图/03Teambition集团版满意度提升/Teambition集团版满意度提升-for项目管理员5.jpg');"></div>
+                                </div>
+                                <div class="step-card-carousel-dots">
+                                    <span class="step-card-carousel-dot active" data-index="0"></span>
+                                    <span class="step-card-carousel-dot" data-index="1"></span>
+                                    <span class="step-card-carousel-dot" data-index="2"></span>
+                                    <span class="step-card-carousel-dot" data-index="3"></span>
+                                    <span class="step-card-carousel-dot" data-index="4"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-card-title">FOR 项目成员</div>
+                            <div class="step-card-carousel">
+                                <div class="step-card-carousel-track">
+                                    <div class="step-card-carousel-slide active" style="background-image: url('项目详情配图/03Teambition集团版满意度提升/Teambition集团版满意度提升-for项目成员1.jpg');"></div>
+                                    <div class="step-card-carousel-slide" style="background-image: url('项目详情配图/03Teambition集团版满意度提升/Teambition集团版满意度提升-for项目成员2.jpg');"></div>
+                                    <div class="step-card-carousel-slide" style="background-image: url('项目详情配图/03Teambition集团版满意度提升/Teambition集团版满意度提升-for项目成员3.jpg');"></div>
+                                    <div class="step-card-carousel-slide" style="background-image: url('项目详情配图/03Teambition集团版满意度提升/Teambition集团版满意度提升-for项目成员4.jpg');"></div>
+                                </div>
+                                <div class="step-card-carousel-dots">
+                                    <span class="step-card-carousel-dot active" data-index="0"></span>
+                                    <span class="step-card-carousel-dot" data-index="1"></span>
+                                    <span class="step-card-carousel-dot" data-index="2"></span>
+                                    <span class="step-card-carousel-dot" data-index="3"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="design-step">
+                    <div class="step-header">
+                        <span class="step-number">04</span>
+                        <span class="step-title">推进落地</span>
+                    </div>
+                    <div class="step-description">
+                        分角色分批迭代落地，项目管理员方案均已上线，项目成员部分方案（我的任务以及打通内部工具）上线。
+                    </div>
+                    <div class="wide-image" style="background-image: url('项目详情配图/03Teambition集团版满意度提升/Teambition集团版满意度提升-推进落地.jpg');"></div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="2026-05-29 final.html#projects" class="footer-link" onclick="window.location.href='2026-05-29 final.html#projects'; return true;">
+                    <span>←</span>
+                    <span>所有项目</span>
+                </a>
+                <div class="footer-tags">
+                    <span class="footer-tag">淘宝直播互动系统</span>
+                    <span class="footer-tag">设计系统 DesignCore 2.0</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.querySelectorAll('.step-card-carousel').forEach(function (carousel) {
+            const slides = carousel.querySelectorAll('.step-card-carousel-slide');
+            const dots = carousel.querySelectorAll('.step-card-carousel-dot');
+            let current = 0;
+
+            function show(index) {
+                slides.forEach(function (s, i) {
+                    s.classList.toggle('active', i === index);
+                });
+                dots.forEach(function (d, i) {
+                    d.classList.toggle('active', i === index);
+                });
+                current = index;
+            }
+
+            dots.forEach(function (dot) {
+                dot.addEventListener('click', function () {
+                    show(parseInt(this.getAttribute('data-index'), 10));
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>采购平台需求方满意度提升 - 项目详情</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #C9A84C;
+            --gold-light: #D4B95A;
+            --gold-dark: #A68B3D;
+            --black: #0a0a0a;
+            --black-card: #1a1a1a;
+            --black-border: #333;
+            --white: #ffffff;
+            --white-light: rgba(255, 255, 255, 0.8);
+            --white-lighter: rgba(255, 255, 255, 0.6);
+        }
+
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+        }
+
+        .back-link {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.9rem;
+            z-index: 100;
+            transition: opacity 0.3s ease;
+        }
+
+        .back-link:hover {
+            opacity: 0.7;
+        }
+
+        .hero-section {
+            background: linear-gradient(180deg, #1e3a5f 0%, #0a0a0a 100%);
+            padding: 6rem 2rem 8rem;
+            text-align: center;
+        }
+
+        .hero-tags {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-tag {
+            padding: 0.3rem 0.8rem;
+            background: rgba(201, 168, 76, 0.1);
+            color: var(--gold);
+            font-size: 0.75rem;
+            border-radius: 9999px;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            color: var(--white-lighter);
+            margin-bottom: 2rem;
+        }
+
+        .hero-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            color: var(--white-lighter);
+            font-size: 0.9rem;
+        }
+
+        .hero-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .results-section {
+            background: var(--black-card);
+            border: 1px solid var(--black-border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: -4rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .result-item {
+            text-align: center;
+        }
+
+        .result-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .result-label {
+            font-size: 0.85rem;
+            color: var(--white-lighter);
+        }
+
+        .main-content {
+            padding: 4rem 0;
+        }
+
+        .content-section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-number {
+            width: 24px;
+            height: 24px;
+            background: rgba(201, 168, 76, 0.1);
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .section-text {
+            font-size: 0.95rem;
+            color: var(--white-lighter);
+            line-height: 1.8;
+        }
+
+        .section-text p {
+            margin-bottom: 1rem;
+        }
+
+        .design-step {
+            background: var(--black-card);
+            border: 1px solid var(--black-border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-number {
+            width: 28px;
+            height: 28px;
+            background: rgba(201, 168, 76, 0.1);
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .step-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .step-description {
+            font-size: 0.9rem;
+            color: var(--white-lighter);
+            margin-bottom: 1.5rem;
+        }
+
+        .step-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .step-card {
+            background: #111;
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .step-card-title {
+            font-size: 0.85rem;
+            color: var(--gold);
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+
+        .step-card-text {
+            font-size: 0.85rem;
+            color: var(--white-lighter);
+            line-height: 1.6;
+        }
+
+        .step-card-image {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #222;
+            border-radius: 8px;
+            margin-top: 1rem;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .pain-point-section {
+            margin-top: 2rem;
+        }
+
+        .pain-point-item {
+            background: #111;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .pain-point-title {
+            font-size: 0.95rem;
+            color: var(--gold);
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+
+        .pain-point-text {
+            font-size: 0.85rem;
+            color: var(--white-lighter);
+            line-height: 1.6;
+        }
+
+        .mockup-section {
+            background: transparent;
+            border-radius: 12px;
+            padding: 0;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .mockup-placeholder {
+            width: 100%;
+            max-width: none;
+            aspect-ratio: 16/9;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            gap: 1rem;
+        }
+
+        .mockup-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(201, 168, 76, 0.2);
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--gold);
+        }
+
+        .mockup-label {
+            font-size: 0.9rem;
+            color: var(--white-lighter);
+        }
+
+        .mockup-sub-label {
+            font-size: 0.8rem;
+            color: var(--white-lighter);
+            opacity: 0.7;
+        }
+
+        .footer {
+            padding: 3rem 0;
+            border-top: 1px solid var(--black-border);
+            margin-top: 4rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-link {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-link:hover {
+            opacity: 0.7;
+        }
+
+        .footer-tags {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .footer-tag {
+            padding: 0.3rem 0.8rem;
+            background: rgba(201, 168, 76, 0.1);
+            color: var(--gold);
+            font-size: 0.75rem;
+            border-radius: 9999px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 1.75rem;
+            }
+
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .step-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="2026-05-28 final.html" class="back-link">
+        <span>←</span>
+        <span>返回作品集</span>
+    </a>
+
+    <section class="hero-section">
+        <div class="hero-tags">
+            <span class="hero-tag">UX Design</span>
+            <span class="hero-tag">User Research</span>
+            <span class="hero-tag">Data-driven</span>
+        </div>
+        <h1 class="hero-title">采购平台需求方满意度提升</h1>
+        <p class="hero-subtitle">全面提升需求方角色的产品满意度</p>
+        <div class="hero-meta">
+            <span>📅 2022</span>
+            <span>👤 Lead UX Designer</span>
+        </div>
+    </section>
+
+    <div class="container">
+        <section class="results-section">
+            <div class="section-label">核心成果 KEY RESULTS</div>
+            <div class="results-grid">
+                <div class="result-item">
+                    <div class="result-value">↑ 15%</div>
+                    <div class="result-label">需求方满意度</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-value">↓ 20%</div>
+                    <div class="result-label">工单问题量</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-value">↓ 30%</div>
+                    <div class="result-label">平均采购周期</div>
+                </div>
+            </div>
+        </section>
+
+        <main class="main-content">
+            <section class="content-section">
+                <h2 class="section-title">
+                    <span class="section-number">01</span>
+                    <span>项目背景</span>
+                </h2>
+                <div class="section-text">
+                    <p>阿里巴巴内部采购平台是支撑集团各业务线采购需求的核心系统，涉及员工日常采购、项目采购、供应商管理等多个场景。随着业务规模的增长，需求方满意度逐渐成为关注焦点。通过数据分析发现，采购流程中存在表单填写复杂、信息获取困难、流程不透明等问题，影响了用户体验和采购效率。本项目旨在通过体验优化提升需求方满意度。</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">
+                    <span class="section-number">02</span>
+                    <span>我的角色</span>
+                </h2>
+                <div class="section-text">
+                    <p>担任主设计师，负责整体体验策略制定、用户研究、交互设计、视觉设计规范，以及跨团队协作推动落地。带领设计团队完成从问题定义到方案落地的全流程工作。</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">
+                    <span class="section-number">03</span>
+                    <span>设计过程</span>
+                </h2>
+
+                <div class="design-step">
+                    <div class="step-header">
+                        <span class="step-number">01</span>
+                        <span class="step-title">问题定义 —— 多种调研方法定义需求方核心体验问题</span>
+                    </div>
+                    <div class="step-description">
+                        通过工单分析、用户访谈、满意度调研等多种方法，全面梳理需求方在采购流程中的痛点问题。
+                    </div>
+                    <div class="step-grid">
+                        <div class="step-card">
+                            <div class="step-card-title">Step1 工单分析</div>
+                            <div class="step-card-text">搜集员工热线、客服机器人、产品反馈等各渠道采购工单问题1000+，分类整理打标，梳理出各采购阶段需求方的核心问题。</div>
+                            <div class="step-card-image" style="background-image: url('项目详情配图/01采购平台需求方满意度提升/采购平台需求方满意度提升-工单分析.jpg');"></div>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-card-title">Step2 问卷调查</div>
+                            <div class="step-card-text">基于工单问题设计满意度问卷，对核心问题进行验证及补充，获取需求方角色的产品满意度分数作为核心监测指标。</div>
+                            <div class="step-card-image" style="background-image: url('项目详情配图/01采购平台需求方满意度提升/采购平台需求方满意度提升-问卷调研.jpg');"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="design-step">
+                    <div class="step-header">
+                        <span class="step-number">02</span>
+                        <span class="step-title">痛点攻克 ——「需求提交表单填写复杂」</span>
+                    </div>
+                    <div class="pain-point-section">
+                        <div class="pain-point-item">
+                            <div class="pain-point-title">信息展示效率提升</div>
+                            <div class="pain-point-text">优化表单布局结构，将原本的两栏布局改为三栏，减少表单长度，提升信息密度和填写效率。</div>
+                            <div class="step-card-image" style="background-image: url('项目详情配图/01采购平台需求方满意度提升/采购平台需求方满意度提升-信息展示效率提升.jpg');"></div>
+                        </div>
+                        <div class="pain-point-item">
+                            <div class="pain-point-title">基于用户行为监测的主动服务</div>
+                            <div class="pain-point-text">通过埋点数据分析用户填写行为，当检测到用户在某字段停留时间过长或反复修改时，主动提供相关帮助信息和填写建议。</div>
+                            <div class="step-card-image" style="background-image: url('项目详情配图/01采购平台需求方满意度提升/采购平台需求方满意度提升-主动服务.jpg');"></div>
+                        </div>
+                        <div class="pain-point-item">
+                            <div class="pain-point-title">新增精简提单模式</div>
+                            <div class="pain-point-text">为商城下单用户提供类C端购买体验，大大降低操作门槛。</div>
+                            <div class="step-card-image" style="background-image: url('项目详情配图/01采购平台需求方满意度提升/采购平台需求方满意度提升-新增精简提单模式.jpg');"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="design-step">
+                    <div class="step-header">
+                        <span class="step-number">03</span>
+                        <span class="step-title">体验闭环：建立满意度监测体系，持续迭代优化</span>
+                    </div>
+                    <div class="mockup-section">
+                        <div class="mockup-placeholder" style="background-image: url('项目详情配图/01采购平台需求方满意度提升/采购平台需求方满意度提升-体验闭环.jpg'); background-size: cover; background-position: center;">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="2026-05-29 final.html#projects" class="footer-link" onclick="window.location.href='2026-05-29 final.html#projects'; return true;">
+                    <span>←</span>
+                    <span>所有项目</span>
+                </a>
+                <div class="footer-tags">
+                    <span class="footer-tag">采购需求导购场景AI Agent</span>
+                    <span class="footer-tag">Teambition集团版</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

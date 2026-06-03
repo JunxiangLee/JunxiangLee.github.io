@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>采购需求导购场景AI Agent - 项目详情</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #C9A84C;
+            --gold-light: #D4B95A;
+            --gold-dark: #A68B3D;
+            --black: #0a0a0a;
+            --black-card: #1a1a1a;
+            --black-border: #333;
+            --white: #ffffff;
+            --white-light: rgba(255, 255, 255, 0.8);
+            --white-lighter: rgba(255, 255, 255, 0.6);
+        }
+
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+        }
+
+        .back-link {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.9rem;
+            z-index: 100;
+            transition: opacity 0.3s ease;
+        }
+
+        .back-link:hover {
+            opacity: 0.7;
+        }
+
+        .hero-section {
+            background: linear-gradient(180deg, #4a148c 0%, #0a0a0a 100%);
+            padding: 6rem 2rem 8rem;
+            text-align: center;
+        }
+
+        .hero-tags {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-tag {
+            padding: 0.3rem 0.8rem;
+            background: rgba(201, 168, 76, 0.1);
+            color: var(--gold);
+            font-size: 0.75rem;
+            border-radius: 9999px;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            color: var(--white-lighter);
+            margin-bottom: 2rem;
+        }
+
+        .hero-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            color: var(--white-lighter);
+            font-size: 0.9rem;
+        }
+
+        .hero-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .results-section {
+            background: var(--black-card);
+            border: 1px solid var(--black-border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: -4rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .result-item {
+            text-align: center;
+        }
+
+        .result-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .result-label {
+            font-size: 0.85rem;
+            color: var(--white-lighter);
+        }
+
+        .main-content {
+            padding: 4rem 0;
+        }
+
+        .content-section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-number {
+            width: 24px;
+            height: 24px;
+            background: rgba(201, 168, 76, 0.1);
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .section-text {
+            font-size: 0.95rem;
+            color: var(--white-lighter);
+            line-height: 1.8;
+        }
+
+        .section-text p {
+            margin-bottom: 1rem;
+        }
+
+        .design-step {
+            background: var(--black-card);
+            border: 1px solid var(--black-border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-number {
+            width: 28px;
+            height: 28px;
+            background: rgba(201, 168, 76, 0.1);
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .step-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .step-description {
+            font-size: 0.9rem;
+            color: var(--white-lighter);
+            margin-bottom: 1.5rem;
+        }
+
+        .step-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .step-card {
+            background: #111;
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .step-card-title {
+            font-size: 0.85rem;
+            color: var(--gold);
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+
+        .step-card-text {
+            font-size: 0.85rem;
+            color: var(--white-lighter);
+            line-height: 1.6;
+        }
+
+        .step-card-image {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #222;
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .step-card-carousel {
+            position: relative;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .step-card-carousel-track {
+            display: flex;
+            overflow: hidden;
+            border-radius: 8px;
+            background: #222;
+        }
+
+        .step-card-carousel-slide {
+            min-width: 100%;
+            aspect-ratio: 16/9;
+            background-size: cover;
+            background-position: center;
+            display: none;
+        }
+
+        .step-card-carousel-slide.active {
+            display: block;
+        }
+
+        .step-card-carousel-dots {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 2;
+        }
+
+        .step-card-carousel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .step-card-carousel-dot.active {
+            background: var(--gold, #c9a962);
+        }
+
+        .pain-point-section {
+            margin-top: 2rem;
+        }
+
+        .pain-point-item {
+            background: #111;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .pain-point-title {
+            font-size: 0.95rem;
+            color: var(--gold);
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+
+        .pain-point-text {
+            font-size: 0.85rem;
+            color: var(--white-lighter);
+            line-height: 1.6;
+        }
+
+        .mockup-section {
+            background: linear-gradient(135deg, #4a148c 0%, #7b2cbf 100%);
+            border-radius: 12px;
+            padding: 4rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .mockup-placeholder {
+            width: 100%;
+            max-width: 600px;
+            height: 300px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            gap: 1rem;
+        }
+
+        .mockup-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(201, 168, 76, 0.2);
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--gold);
+        }
+
+        .mockup-label {
+            font-size: 0.9rem;
+            color: var(--white-lighter);
+        }
+
+        .mockup-sub-label {
+            font-size: 0.8rem;
+            color: var(--white-lighter);
+            opacity: 0.7;
+        }
+
+        .footer {
+            padding: 3rem 0;
+            border-top: 1px solid var(--black-border);
+            margin-top: 4rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-link {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-link:hover {
+            opacity: 0.7;
+        }
+
+        .footer-tags {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .footer-tag {
+            padding: 0.3rem 0.8rem;
+            background: rgba(201, 168, 76, 0.1);
+            color: var(--gold);
+            font-size: 0.75rem;
+            border-radius: 9999px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 1.75rem;
+            }
+
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .step-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="2026-05-28 final.html" class="back-link">
+        <span>←</span>
+        <span>返回作品集</span>
+    </a>
+
+    <section class="hero-section">
+        <div class="hero-tags">
+            <span class="hero-tag">AI Agent</span>
+            <span class="hero-tag">Conversational UI</span>
+            <span class="hero-tag">LUI</span>
+        </div>
+        <h1 class="hero-title">采购需求导购场景AI Agent</h1>
+        <p class="hero-subtitle">从0-1打造采购AI Agent，降低需求导购场景的问题咨询率</p>
+        <div class="hero-meta">
+            <span>📅 2024</span>
+            <span>👤 Lead UX Designer</span>
+        </div>
+    </section>
+
+    <div class="container">
+        <section class="results-section">
+            <div class="section-label">核心成果 KEY RESULTS</div>
+            <div class="results-grid">
+                <div class="result-item">
+                    <div class="result-value">45%</div>
+                    <div class="result-label">AI解决率</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-value">↓ 30%</div>
+                    <div class="result-label">问题咨询率</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-value">15s</div>
+                    <div class="result-label">平均响应时长</div>
+                </div>
+            </div>
+        </section>
+
+        <main class="main-content">
+            <section class="content-section">
+                <h2 class="section-title">
+                    <span class="section-number">01</span>
+                    <span>项目背景</span>
+                </h2>
+                <div class="section-text">
+                    <p>在采购需求导购场景中，用户经常遇到各类问题需要咨询，传统的帮助中心和人工客服模式存在响应慢、效率低等痛点。随着AI技术的发展，引入AI Agent成为提升用户体验、降低运营成本的重要方向。本项目旨在从0-1打造采购需求导购场景的AI Agent，通过自然语言交互方式为用户提供实时、准确的服务。</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">
+                    <span class="section-number">02</span>
+                    <span>我的角色</span>
+                </h2>
+                <div class="section-text">
+                    <p>担任主设计师，负责AI Agent的整体交互设计、对话流程设计、信息架构设计，以及相关视觉规范的制定。协调产品、研发、数据团队，推动项目从概念到落地的全流程。</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2 class="section-title">
+                    <span class="section-number">03</span>
+                    <span>设计过程</span>
+                </h2>
+
+                <div class="design-step">
+                    <div class="step-header">
+                        <span class="step-number">01</span>
+                        <span class="step-title">需求分析 —— 定义AI Agent的核心能力边界</span>
+                    </div>
+                    <div class="step-description">
+                        通过用户调研和工单分析，明确用户在采购需求导购场景中的核心问题类型和服务期望。
+                    </div>
+                    <div class="step-grid">
+                        <div class="step-card">
+                            <div class="step-card-title">用户需求梳理</div>
+                            <div class="step-card-text">分析历史工单数据，归类用户问题类型，识别高频问题场景，定义AI Agent需要覆盖的服务范围。</div>
+                            <div class="step-card-carousel">
+                                <div class="step-card-carousel-track">
+                                    <div class="step-card-carousel-slide active" style="background-image: url('项目详情配图/02采购需求导购场景AI agent/采购需求导购场景AI agent-工单分析.jpg');"></div>
+                                    <div class="step-card-carousel-slide" style="background-image: url('项目详情配图/02采购需求导购场景AI agent/采购需求导购场景AI agent-用户访谈.jpg');"></div>
+                                </div>
+                                <div class="step-card-carousel-dots">
+                                    <span class="step-card-carousel-dot active" data-index="0"></span>
+                                    <span class="step-card-carousel-dot" data-index="1"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-card-title">能力边界定义</div>
+                            <div class="step-card-text">明确AI Agent能够处理的问题类型，以及需要转人工的场景，确保服务质量和用户体验的平衡。</div>
+                            <div class="step-card-image" style="background-image: url('项目详情配图/02采购需求导购场景AI agent/采购需求导购场景AI agent-能力边界定义.jpg');"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="design-step">
+                    <div class="step-header">
+                        <span class="step-number">02</span>
+                        <span class="step-title">技术预研 —— 理解AI Agent的实现路径</span>
+                    </div>
+                    <div class="step-description">
+                        提前理解采购AI Agent的实现路径，绘制出底层交互链路图。核心是通过「大模型识别+流程编排」的方式，实现需求导购细分场景的对话引导。
+                    </div>
+                    <div class="step-card-image" style="background-image: url('项目详情配图/02采购需求导购场景AI agent/采购需求导购场景AI agent-技术预研.jpg');"></div>
+                </div>
+
+                <div class="design-step">
+                    <div class="step-header">
+                        <span class="step-number">03</span>
+                        <span class="step-title">对话设计 —— 打造自然流畅的交互体验</span>
+                    </div>
+                    <div class="pain-point-section">
+                        <div class="pain-point-item">
+                            <div class="pain-point-title">用户可感知 | Agent进入退出及引导</div>
+                            <div class="pain-point-text">在「内外小蜜」载体上引入「专业域Agent」的概念，通过文案引导、固定bar及欢迎卡片让用户不迷路。</div>
+                            <div class="step-card-image" style="background-image: url('项目详情配图/02采购需求导购场景AI agent/采购需求导购场景AI agent-用户可感知.jpg');"></div>
+                        </div>
+                        <div class="pain-point-item">
+                            <div class="pain-point-title">智能追问与澄清 | 当信息不完整时，自动引导用户补充必要信息</div>
+                            <div class="pain-point-text">设计智能追问策略，在用户问题模糊或信息不全时，以自然友好的方式引导用户提供更多细节。</div>
+                            <div class="step-card-image" style="background-image: url('项目详情配图/02采购需求导购场景AI agent/采购需求导购场景AI agent-智能追问与澄清.jpg');"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="design-step">
+                    <div class="step-header">
+                        <span class="step-number">04</span>
+                        <span class="step-title">验证迭代 —— 提升AI解决率与用户满意度</span>
+                    </div>
+                    <div class="step-description">
+                        通过可用性测试验证方案，基于用户问题快速产出优化方案，提升AI解决率与用户满意度。
+                    </div>
+                    <div class="pain-point-section">
+                        <div class="pain-point-item">
+                            <div class="pain-point-title">方案验证</div>
+                            <div class="step-card-image" style="background-image: url('项目详情配图/02采购需求导购场景AI agent/采购需求导购场景AI agent-方案验证.jpg');"></div>
+                        </div>
+                        <div class="pain-point-item">
+                            <div class="pain-point-title">优化迭代</div>
+                            <div class="step-card-image" style="background-image: url('项目详情配图/02采购需求导购场景AI agent/采购需求导购场景AI agent-优化迭代.jpg');"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="design-step">
+                    <div class="step-header">
+                        <span class="step-number">05</span>
+                        <span class="step-title">规范沉淀 —— AI交互范式总结</span>
+                    </div>
+                    <div class="step-description">
+                        梳理项目内的对话卡片规范，项目结束后基于采购/法务等多业务内的AI交互，沉淀业务内的AI交互范式，指导设计的同时为研发提效。
+                    </div>
+                    <div class="step-card-carousel">
+                        <div class="step-card-carousel-track">
+                            <div class="step-card-carousel-slide active" style="background-image: url('项目详情配图/02采购需求导购场景AI agent/采购需求导购场景AI agent-规范沉淀1.jpg');"></div>
+                            <div class="step-card-carousel-slide" style="background-image: url('项目详情配图/02采购需求导购场景AI agent/采购需求导购场景AI agent-规范沉淀2.jpg');"></div>
+                        </div>
+                        <div class="step-card-carousel-dots">
+                            <span class="step-card-carousel-dot active" data-index="0"></span>
+                            <span class="step-card-carousel-dot" data-index="1"></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="2026-05-29 final.html#projects" class="footer-link" onclick="window.location.href='2026-05-29 final.html#projects'; return true;">
+                    <span>←</span>
+                    <span>所有项目</span>
+                </a>
+                <div class="footer-tags">
+                    <span class="footer-tag">采购平台需求方满意度提升</span>
+                    <span class="footer-tag">Teambition集团版</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.querySelectorAll('.step-card-carousel').forEach(function (carousel) {
+            const slides = carousel.querySelectorAll('.step-card-carousel-slide');
+            const dots = carousel.querySelectorAll('.step-card-carousel-dot');
+            let current = 0;
+            let timer = null;
+
+            function show(index) {
+                slides.forEach(function (s, i) {
+                    s.classList.toggle('active', i === index);
+                });
+                dots.forEach(function (d, i) {
+                    d.classList.toggle('active', i === index);
+                });
+                current = index;
+            }
+
+            function next() {
+                show((current + 1) % slides.length);
+            }
+
+            function start() {
+                stop();
+                timer = setInterval(next, 3000);
+            }
+
+            function stop() {
+                if (timer) {
+                    clearInterval(timer);
+                    timer = null;
+                }
+            }
+
+            dots.forEach(function (dot) {
+                dot.addEventListener('click', function () {
+                    show(parseInt(this.getAttribute('data-index'), 10));
+                    start();
+                });
+            });
+
+            carousel.addEventListener('mouseenter', stop);
+            carousel.addEventListener('mouseleave', start);
+
+            start();
+        });
+    </script>
+</body>
+</html>
