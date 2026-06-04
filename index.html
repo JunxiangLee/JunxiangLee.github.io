@@ -107,12 +107,12 @@
         }
 
         .hero::after {
-            content: 'Design';
+            content: 'Portfolio';
             position: absolute;
-            font-size: 25rem;
+            font-size: 20rem;
             font-weight: 900;
-            color: rgba(201, 169, 98, 0.03);
-            letter-spacing: -10px;
+            color: rgba(201, 169, 98, 0.05);
+            letter-spacing: -8px;
             pointer-events: none;
             z-index: 0;
             transition: transform 0.1s ease-out;
@@ -122,7 +122,7 @@
             transition: transform 0.1s ease-out;
         }
 
-        #particles {
+        .tech-grid {
             position: absolute;
             top: 0;
             left: 0;
@@ -130,6 +130,75 @@
             height: 100%;
             pointer-events: none;
             z-index: 0;
+            opacity: 0.8;
+        }
+
+        .grid-layer {
+            animation: grid-breathe 6s ease-in-out infinite;
+        }
+
+        @keyframes grid-breathe {
+            0%, 100% { transform: scale(0.99); opacity: 0.5; }
+            50% { transform: scale(1.01); opacity: 0.7; }
+        }
+
+        .draw-line {
+            stroke-dasharray: 600;
+            stroke-dashoffset: 600;
+            animation: draw-rect 2s ease-out forwards;
+        }
+
+        .draw-line-delay {
+            stroke-dasharray: 600;
+            stroke-dashoffset: 600;
+            animation: draw-rect 2s ease-out 0.3s forwards;
+        }
+
+        @keyframes draw-rect {
+            to { stroke-dashoffset: 0; }
+        }
+
+        .draw-line-network {
+            stroke-dasharray: 400;
+            stroke-dashoffset: 400;
+            animation: draw-network 2.5s ease-out forwards;
+        }
+
+        .draw-line-network:nth-child(1) { animation-delay: 0.8s; }
+        .draw-line-network:nth-child(2) { animation-delay: 1s; }
+        .draw-line-network:nth-child(3) { animation-delay: 1.2s; }
+        .draw-line-network:nth-child(4) { animation-delay: 1.4s; }
+        .draw-line-network:nth-child(5) { animation-delay: 1.6s; }
+        .draw-line-network:nth-child(6) { animation-delay: 1.8s; }
+        .draw-line-network:nth-child(7) { animation-delay: 2s; }
+
+        @keyframes draw-network {
+            to { stroke-dashoffset: 0; }
+        }
+
+        .dot-float {
+            animation: dot-float 4s ease-in-out infinite;
+            opacity: 0;
+        }
+
+        .dot-float:nth-child(1) { animation-delay: 0s; }
+        .dot-float:nth-child(2) { animation-delay: 0.2s; }
+        .dot-float:nth-child(3) { animation-delay: 0.4s; }
+        .dot-float:nth-child(4) { animation-delay: 0.6s; }
+        .dot-float:nth-child(5) { animation-delay: 0.8s; }
+        .dot-float:nth-child(6) { animation-delay: 1s; }
+        .dot-float:nth-child(7) { animation-delay: 1.2s; }
+        .dot-float:nth-child(8) { animation-delay: 1.4s; }
+
+        @keyframes dot-float {
+            0%, 100% { 
+                transform: translateY(0); 
+                opacity: 0.3;
+            }
+            50% { 
+                transform: translateY(-8px); 
+                opacity: 0.8;
+            }
         }
 
         .hero-content {
@@ -690,10 +759,13 @@
             height: 360px;
             display: flex;
             flex-direction: column;
+            outline: 1px solid transparent;
+            outline-offset: -1px;
         }
 
         .project-card-link:hover .project-card {
             border-color: var(--gold);
+            outline-color: var(--gold);
             transform: translateY(-3px);
         }
 
@@ -2679,7 +2751,35 @@
 
     <!-- Hero Section -->
     <section class="hero" id="hero">
-        <canvas id="particles"></canvas>
+        <svg class="tech-grid" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+            <defs>
+                <pattern id="gridPattern" width="40" height="40" patternUnits="userSpaceOnUse">
+                    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(201,169,98,0.12)" stroke-width="0.5" />
+                </pattern>
+            </defs>
+            <g class="grid-layer" style="transform-origin: 600px 400px;">
+                <rect x="0" y="0" width="1200" height="800" fill="url(#gridPattern)" />
+            </g>
+            <g class="dot-grid">
+                <circle cx="150" cy="400" r="2" fill="rgba(201,169,98,0.6)" class="dot-float" />
+                <circle cx="300" cy="200" r="2" fill="rgba(201,169,98,0.6)" class="dot-float" />
+                <circle cx="450" cy="600" r="2" fill="rgba(201,169,98,0.6)" class="dot-float" />
+                <circle cx="600" cy="300" r="2" fill="rgba(201,169,98,0.6)" class="dot-float" />
+                <circle cx="750" cy="500" r="2" fill="rgba(201,169,98,0.6)" class="dot-float" />
+                <circle cx="900" cy="250" r="2" fill="rgba(201,169,98,0.6)" class="dot-float" />
+                <circle cx="1050" cy="450" r="2" fill="rgba(201,169,98,0.6)" class="dot-float" />
+                <circle cx="200" cy="650" r="2" fill="rgba(201,169,98,0.6)" class="dot-float" />
+            </g>
+            <g class="line-network">
+                <line x1="150" y1="400" x2="300" y2="200" stroke="rgba(201,169,98,0.15)" stroke-width="1" class="draw-line-network" />
+                <line x1="300" y1="200" x2="600" y2="300" stroke="rgba(201,169,98,0.15)" stroke-width="1" class="draw-line-network" />
+                <line x1="600" y1="300" x2="900" y2="250" stroke="rgba(201,169,98,0.15)" stroke-width="1" class="draw-line-network" />
+                <line x1="600" y1="300" x2="450" y2="600" stroke="rgba(201,169,98,0.15)" stroke-width="1" class="draw-line-network" />
+                <line x1="450" y1="600" x2="200" y2="650" stroke="rgba(201,169,98,0.15)" stroke-width="1" class="draw-line-network" />
+                <line x1="600" y1="300" x2="750" y2="500" stroke="rgba(201,169,98,0.15)" stroke-width="1" class="draw-line-network" />
+                <line x1="750" y1="500" x2="1050" y2="450" stroke="rgba(201,169,98,0.15)" stroke-width="1" class="draw-line-network" />
+            </g>
+        </svg>
         <div class="hero-content">
             <div class="hero-tag"><span class="hero-tag-icon">✨</span>UX / PRODUCT DESIGN<span class="hero-tag-icon">✨</span></div>
             <h1 class="hero-name">李俊翔</h1>
@@ -3174,115 +3274,6 @@
         document.querySelectorAll('.fade-in-up').forEach(el => {
             observer.observe(el);
         });
-
-        // Star Trail Effect
-        const canvas = document.getElementById('particles');
-        const ctx = canvas.getContext ? canvas.getContext('2d') : null;
-        
-        let stars = [];
-        const starCount = 30;
-        let mouseX = 0;
-        let mouseY = 0;
-
-        function resizeCanvas() {
-            if (canvas) {
-                canvas.width = canvas.offsetWidth;
-                canvas.height = canvas.offsetHeight;
-            }
-        }
-
-        function createStar() {
-            return {
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                size: Math.random() * 1.5 + 0.5,
-                speedX: (Math.random() - 0.5) * 0.2,
-                speedY: (Math.random() - 0.5) * 0.2,
-                opacity: Math.random() * 0.4 + 0.2,
-                twinkleSpeed: Math.random() * 0.02 + 0.01,
-                twinklePhase: Math.random() * Math.PI * 2
-            };
-        }
-
-        function initStars() {
-            if (!canvas) return;
-            resizeCanvas();
-            stars = [];
-            for (let i = 0; i < starCount; i++) {
-                stars.push(createStar());
-            }
-        }
-
-        function drawStar(star) {
-            if (!ctx) return;
-            
-            ctx.beginPath();
-            ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(201, 169, 98, ${star.opacity})`;
-            ctx.shadowBlur = 10;
-            ctx.shadowColor = 'rgba(201, 169, 98, 0.5)';
-            ctx.fill();
-            ctx.shadowBlur = 0;
-        }
-
-        function updateStar(star) {
-            star.x += star.speedX;
-            star.y += star.speedY;
-            star.twinklePhase += star.twinkleSpeed;
-            
-            star.opacity = 0.2 + Math.sin(star.twinklePhase) * 0.2;
-
-            if (star.x < 0) star.x = canvas.width;
-            if (star.x > canvas.width) star.x = 0;
-            if (star.y < 0) star.y = canvas.height;
-            if (star.y > canvas.height) star.y = 0;
-
-            const dx = mouseX - star.x;
-            const dy = mouseY - star.y;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-            const influenceDistance = 150;
-            
-            if (distance < influenceDistance) {
-                const force = (influenceDistance - distance) / influenceDistance;
-                star.x -= dx * force * 0.02;
-                star.y -= dy * force * 0.02;
-            }
-        }
-
-        function animateStars() {
-            if (!ctx || !canvas) return;
-            
-            ctx.fillStyle = 'rgba(13, 13, 13, 0.1)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            stars.forEach(star => {
-                updateStar(star);
-                drawStar(star);
-            });
-
-            requestAnimationFrame(animateStars);
-        }
-
-        const heroSection = document.querySelector('.hero');
-        if (heroSection && canvas) {
-            initStars();
-            animateStars();
-
-            heroSection.addEventListener('mousemove', (e) => {
-                const rect = heroSection.getBoundingClientRect();
-                mouseX = e.clientX - rect.left;
-                mouseY = e.clientY - rect.top;
-            });
-
-            heroSection.addEventListener('mouseleave', () => {
-                mouseX = -1000;
-                mouseY = -1000;
-            });
-
-            window.addEventListener('resize', () => {
-                resizeCanvas();
-            });
-        }
 
         // Parallax Scroll Effect
         let ticking = false;
